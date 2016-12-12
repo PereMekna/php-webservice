@@ -38,14 +38,20 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="register.php">S'inscrire</a></li>
           <li><a href="#">API</a></li>
+          <li><p class="navbar-text">Token </p></li>
         </ul>
+        <form class="navbar-form">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i>
+            <input type="text" value="<?php echo $_SESSION["token"]; ?>" />
+        </form>
         <?php 
           if (!isset($_SESSION["username"])) {
         ?>
-        <form id="signin" class="navbar-form navbar-right" role="form">
+        <form id="signin" class="navbar-form navbar-right" role="form" method="POST" action="./controllers/login-ctrl.php">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                              <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email Address">                                        
+                              <input id="username" type="text" class="form-control" name="username" value="" placeholder="Email Address">                                        
                           </div>
 
                           <div class="input-group">
@@ -59,7 +65,7 @@
        <?php 
          if (isset($_SESSION["username"])) {
        ?>
-       <div class="navbar-form navbar-right"><p>Bienvenue <?php echo $_SESSION["username"]; ?> Token : <input type="text" value="<?php echo $_SESSION["token"]; ?>" /></p></div>
+       <p class="navbar-text navbar-right">Bienvenue <?php echo $_SESSION["username"]; ?> <a href="./controllers/logout-ctrl.php">Se déconnecter</a></p>
        <?php } ?>
 
       </div>

@@ -6,6 +6,31 @@
   <?php 
 
     if (isset($_SESSION["username"])) {
+    $m = new MongoClient("mongodb://louis:lambda@reggaeshark.eu");
+    $db = $m->admin;
+    $collection = $db->collections; 
+    $colls = $collection->find(
+       array(
+       "username" => $_SESSION["username"]
+       ));
+
+    $numberColls = 0;
+    foreach ($colls as $value) {
+      $numberColls+=1;
+    };
+
+    $values = $db->values;
+    $collectionsUser = $values->find(
+      array(
+        "username" => $_SESSION["username"]),
+      array(
+        "username" => 0,
+        "collection" => 0
+        ));
+    $numberItemUser = 0;
+    foreach ($collectionsUser as $value) {
+      $numberItemUser+=1;
+    };
   ?>
   
   <div class="col-md-6">
@@ -24,22 +49,33 @@
     
   </div>
   <div class="col-md-6">
-    <div class="well">
-      <h3 class="dark-grey">Mes collections</h3>
-      <ul>
+    <div class="panel panel-primary">
+    <div class="panel-heading">Mes collections</div>
+    <div class="panel-body">
+      <ul class="list-group">
         <?php
-        $m = new MongoClient("mongodb://louis:lambda@reggaeshark.eu");
-        $db = $m->admin;
-        $collection = $db->collections; 
-        $colls = $collection->find(
-           array(
-           "username" => $_SESSION["username"]
-           ));
+
+
         foreach ($colls as $document) {
-            echo "<li>".$document["name"] . "</li><br />";
+        $collectionToShow = $values->find(
+          array(
+            "username" => $_SESSION["username"],
+            "collection" => $document["name"]),
+          array(
+            "username" => 0,
+            "collection" => 0
+            ));
+            
+            $numberItem = 0;
+            foreach ($collectionToShow as $value) {
+              $numberItem+=1;
+            };
+            echo "<li class='list-group-item'>".$document["name"] ." <span class='badge'>".$numberItem."</span></li>";
         }
         ?>
       </ul>
+    </div>
+    <div class="panel-footer"><?php echo $numberItemUser; ?> objets dans <?php echo $numberColls; ?> collections</div>
     </div>
   </div>
   <?php } ?>

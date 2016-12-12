@@ -1,3 +1,6 @@
 Options +FollowSymLinks
 RewriteEngine On
-RewriteRule ^api/ api.php [L]
+RewriteRule ^api/([a-zA-Z0-9]{64})\/([a-zA-Z]+)\/([a-zA-Z0-9]+) api.php?token=$1&collection=$2&index=$3 [L]
+RewriteRule ^api/([a-zA-Z0-9]{64})\/([a-zA-Z]+) api.php?token=$1&collection=$2 [L]
+RewriteRule ^api/([a-zA-Z0-9]{64}) api.php?token=$1 [L]
+RewriteRule ^api api.php [L]

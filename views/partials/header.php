@@ -41,7 +41,7 @@
         ?>
           <li class="active"><a href="register.php">S'inscrire</a></li>
           <?php } ?>
-          <li><a href="./api/">API</a></li>
+          <li><a href="./api/<?php if (isset($_SESSION['token'])) echo $_SESSION['token']; ?>">API</a></li>
         </ul>
         <?php 
           if (isset($_SESSION["username"])) {

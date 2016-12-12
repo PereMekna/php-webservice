@@ -36,15 +36,24 @@
      
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+        <?php 
+          if (!isset($_SESSION["username"])) {
+        ?>
           <li class="active"><a href="register.php">S'inscrire</a></li>
-          <li><a href="#">API</a></li>
-          <li><p class="navbar-text">Token </p></li>
+          <?php } ?>
+          <li><a href="./api/">API</a></li>
         </ul>
-        <form class="navbar-form">
+        <?php 
+          if (isset($_SESSION["username"])) {
+        ?>
+        <div class="navbar-form">
           <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i>
-            <input type="text" value="<?php echo $_SESSION["token"]; ?>" />
-        </form>
+            <span class="input-group-addon">Token <i class="glyphicon glyphicon-lock"></i></span>
+            <input type="text" class="form-control" value="<?php echo $_SESSION['token']; ?>" />
+          </div>
+          <p class="navbar-right">Bienvenue <?php echo $_SESSION["username"]; ?> <a href="./controllers/logout-ctrl.php">Se déconnecter</a></p>
+        </div>
+        <?php } ?>
         <?php 
           if (!isset($_SESSION["username"])) {
         ?>
@@ -62,11 +71,7 @@
                           <button type="submit" class="btn btn-primary">Login</button>
                      </form>
                      <?php } ?>
-       <?php 
-         if (isset($_SESSION["username"])) {
-       ?>
-       <p class="navbar-text navbar-right">Bienvenue <?php echo $_SESSION["username"]; ?> <a href="./controllers/logout-ctrl.php">Se déconnecter</a></p>
-       <?php } ?>
+       
 
       </div>
     </div>

@@ -30,7 +30,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">WS</a>
+        <a class="navbar-brand" href="./">WS</a>
       </div>
 
      
@@ -41,7 +41,7 @@
         ?>
           <li class="active"><a href="register.php">S'inscrire</a></li>
           <?php } ?>
-          <li><a href="./api/<?php if (isset($_SESSION['token'])) echo $_SESSION['token']; ?>">API</a></li>
+          <li><a href="./api/<?php if (isset($_SESSION['token'])) echo $_SESSION['token']; ?>" target="_blank">API</a></li>
         </ul>
         <?php 
           if (isset($_SESSION["username"])) {
@@ -51,7 +51,7 @@
             <span class="input-group-addon">Token <i class="glyphicon glyphicon-lock"></i></span>
             <input type="text" class="form-control" value="<?php echo $_SESSION['token']; ?>" />
           </div>
-          <p class="navbar-right">Bienvenue <?php echo $_SESSION["username"]; ?> <a href="./controllers/logout-ctrl.php">Se déconnecter</a></p>
+          <p class="navbar-right" style="margin-top: 7px">Bienvenue <?php echo $_SESSION["username"]; ?> <a href="./controllers/logout-ctrl.php">Se déconnecter</a></p>
         </div>
         <?php } ?>
         <?php 
